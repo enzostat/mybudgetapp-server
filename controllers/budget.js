@@ -6,17 +6,33 @@ let expressJWT = require('express-jwt')
 
 
 
-router.get('/', (req,res) => {
-    res.send('Nothing to see here')
+router.get('/:id', (req,res) => {
+    db.Finance.findOne({userId: req.params.id})
+    .then(finance => {
+        if (!finance) {
+            return res.send('We were unable to find your budget. Are you sure you started one?')
+        }
+        res.send({finance})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(409).send({message: 'Bro, something fucked up. Bro I swear to god, it is not my fault'})
+    })
 })
 
-router.get('/:id', (req,res) => {
-    db.finance.findOne({userId: req.params.id})
+router.post('/:id', (req,res) => {
+    db.Finance.findOne({userId: req.params.id})
     .then(finance => {
         if(finance) {
             return res.status(409).send({message: 'You have already created a budget'})
         }
-        db.finance.create(req.body)
+        db.Finance.create({
+            salary: req.body.salary,
+            rent: req.body.rent || req.body.mortgage,
+            savings: req.body.savings,
+            monthlies: req.body.monthlies,
+            userId: req.params.id
+        })
         .then(newBudget => {
             res.send({newBudget})
         })
@@ -31,8 +47,11 @@ router.get('/:id', (req,res) => {
     })
 })
 
-router.put('/', (req,res) => {
-
+router.put('/:id', (req,res) => {
+    db.Finance.findOneAndUpdate({userId: req.params.id})
+    .then(finance => {
+        res.send({finance})
+    })
 })
 
 

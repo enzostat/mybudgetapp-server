@@ -19,3 +19,5 @@ let financeSchema = new mongoose.Schema({
     }
     
 })
+
+module.exports = mongoose.model('finance', financeSchema)
