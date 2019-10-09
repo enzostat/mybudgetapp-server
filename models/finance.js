@@ -2,6 +2,20 @@ let mongoose = require('mongoose')
 
 let financeSchema = new mongoose.Schema({
     salary: Number,
-    monthly: Array
+    monthlies: [{
+        name: String,
+        amount: Number
+    }],
+    rent: Number,
+    savings: Number,
+    incidentals: [{
+        name: String,
+        amount: Number,
+        category: String
+    }],
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
     
 })
