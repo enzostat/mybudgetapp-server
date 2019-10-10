@@ -48,9 +48,22 @@ router.post('/:id', (req,res) => {
 })
 
 router.put('/:id', (req,res) => {
-    db.Finance.findOneAndUpdate({userId: req.params.id})
-    .then(finance => {
-        res.send({finance})
+    db.Finance.findOne({userId: req.params.id})
+    .then(budget => {
+        req.body.incidentals.forEach(i => {
+            budget.incidentals.push(p)
+        })
+        
+        return budget.save()
+        
+    })
+    .then(editedBudget => {
+       
+        res.send(editedBudget)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(404).send({message: 'Error accessing the database'})
     })
 })
 
