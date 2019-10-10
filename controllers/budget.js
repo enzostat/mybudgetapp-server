@@ -48,10 +48,11 @@ router.post('/:id', (req,res) => {
 })
 
 router.put('/:id', (req,res) => {
+    console.log(req.body)
     db.Finance.findOne({userId: req.params.id})
     .then(budget => {
-        req.body.incidentals.forEach(i => {
-            budget.incidentals.push(p)
+        req.body.forEach(i => {
+            budget.incidentals.push(i)
         })
         
         return budget.save()
