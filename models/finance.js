@@ -4,7 +4,8 @@ let financeSchema = new mongoose.Schema({
     salary: Number,
     monthlies: [{
         name: String,
-        amount: Number
+        amount: Number,
+        category: String
     }],
     rent: Number,
     savings: Number,

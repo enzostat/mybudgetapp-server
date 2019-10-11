@@ -68,6 +68,17 @@ router.put('/:id', (req,res) => {
     })
 })
 
+router.put('/update/:id', (req, res) => {
+    db.Finance.findOneAndUpdate({userId: req.params.id}, req.body, {new:true})
+    .then(editedBudget => {
+        res.send({editedBudget})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(409).send({message: 'bro something went way wrong'})
+    })
+})
+
 
 
 
