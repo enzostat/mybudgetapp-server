@@ -1,14 +1,23 @@
 let mongoose = require('mongoose')
 
 let financeSchema = new mongoose.Schema({
-    salary: Number,
+    salary: {
+        type: Number,
+        required: true
+    },
     monthlies: [{
         name: String,
         amount: Number,
         category: String
     }],
-    rent: Number,
-    savings: Number,
+    rent: {
+        type: Number,
+        default: 0
+    },
+    savings: {
+        type: Number,
+        default: 0
+    },
     incidentals: [{
         name: String,
         amount: Number,
