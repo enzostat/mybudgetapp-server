@@ -27,7 +27,11 @@ app.use('/auth',expressJWT({
         {url: '/auth/signup', methods: ['POST']}
     ]
 }), require('./controllers/auth'))
-app.use('/budget', require('./controllers/budget'))
+// app.use('/budget', require('./controllers/budget'))
+
+app.use('/budget',expressJWT({
+    secret: process.env.JWT_SECRET
+}), require('./controllers/budget'))
 
 //Routes
 app.get('*', (req,res) => {
