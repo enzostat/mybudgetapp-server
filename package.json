@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "engines": {
-    "node": "v11.13.0"
+    "node": "v12.6.0"
   },
   "author": "",
   "license": "ISC",
